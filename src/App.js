@@ -1,24 +1,23 @@
 import React from 'react';
-import Counter from './Counter';
+import Counter, { reducer } from './Counter';
 import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 
 // Setup initial states
 const defaultState = {
-  count: 75,
-  name: 'Arvis',
-};
-// Reducer setup
-const reducer = (state, action) => {
-  return state;
+  count: 0,
+  name: prompt('Insert your name', 'Name'),
 };
 
 // Store setup
 const store = createStore(reducer, defaultState);
 
-//console.log(store.getState());
-
 const App = () => {
-  return <Counter state={store.getState()} />;
+  return (
+    <Provider store={store}>
+      <Counter />
+    </Provider>
+  );
 };
 
 export default App;
