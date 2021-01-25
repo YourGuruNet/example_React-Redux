@@ -18,39 +18,41 @@ export const reducer = (state, action) => {
       return state;
   }
 };
-const Counter = (props) => {
+const Counter = ({ name, count, increase, decrease, reset }) => {
   // console.log(props);
   return (
     <div className='container'>
-      <h1>{`Hey, ${props.name}! Now
+      <h1>{`Hey, ${name}! Now
        you can test this app`}</h1>
       <h1>Counter</h1>
-      <p className='counter'>{props.count}</p>
+      <p className='counter'>{count}</p>
       <div className='buttons'>
-        <button
-          className='btn'
-          onClick={() => props.dispatch({ type: DECREASE })}
-        >
+        <button className='btn' onClick={decrease}>
           decrease
         </button>
-        <button className='btn' onClick={() => props.dispatch({ type: RESET })}>
+        <button className='btn' onClick={reset}>
           restart
         </button>
-        <button
-          className='btn'
-          onClick={() => props.dispatch({ type: INCREASE })}
-        >
+        <button className='btn' onClick={increase}>
           increase
         </button>
       </div>
     </div>
   );
 };
-
-function mapStateToProps(state) {
+// States
+function mapStateToProps(state, dispatch) {
   return {
     count: state.count,
     name: state.name,
   };
 }
-export default connect(mapStateToProps)(Counter);
+// Functions
+function mapDispatchToProps(dispatch) {
+  return {
+    increase: () => dispatch({ type: INCREASE }),
+    reset: () => dispatch({ type: RESET }),
+    decrease: () => dispatch({ type: DECREASE }),
+  };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);
