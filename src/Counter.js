@@ -1,7 +1,8 @@
 import React from 'react';
 
-const Counter = () => {
-  const [count, setCount] = React.useState(0);
+const Counter = (props) => {
+  const amount = props.state.count;
+  const [count, setCount] = React.useState(amount);
   return (
     <div className='container'>
       <h1>Counter</h1>
