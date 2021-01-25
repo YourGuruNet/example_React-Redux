@@ -5,8 +5,13 @@ export const DECREASE = 'DECREASE';
 export const INCREASE = 'INCREASE';
 export const RESET = 'RESET';
 
+// Setup initial states
+const defaultState = {
+  count: 0,
+  name: prompt('Insert your name', 'Name'),
+};
 // Reducer setup
-export const reducer = (state, action) => {
+export const CounterReducer = (state = defaultState, action) => {
   switch (action.type) {
     case DECREASE:
       return { ...state, count: state.count - 1 };
@@ -41,7 +46,7 @@ const Counter = ({ name, count, increase, decrease, reset }) => {
   );
 };
 // States
-function mapStateToProps(state, dispatch) {
+function mapStateToProps(state) {
   return {
     count: state.count,
     name: state.name,
