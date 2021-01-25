@@ -10,7 +10,11 @@ const defaultState = {
 };
 
 // Store setup
-const store = createStore(reducer, defaultState);
+const store = createStore(
+  reducer,
+  defaultState,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 const App = () => {
   return (
