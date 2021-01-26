@@ -6,6 +6,10 @@ export const DECREASE = 'DECREASE';
 export const INCREASE = 'INCREASE';
 export const RESET = 'RESET';
 
+export const Reset = () => {
+  return { type: RESET };
+};
+
 // Setup initial states
 const defaultState = {
   count: 0,

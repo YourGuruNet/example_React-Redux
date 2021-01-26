@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { RESET } from './Counter';
+import { Reset } from './Counter';
 
 export const MODAL_OPEN = 'MODAL_OPEN ';
 export const MODAL_CLOSE = 'MODAL_CLOSE';
@@ -10,6 +10,11 @@ const defaultState = {
   show: false,
   text: '',
 };
+
+export const modalClose = () => {
+  return { type: MODAL_CLOSE };
+};
+
 export const ModalReducer = (state = defaultState, action) => {
   switch (action.type) {
     case MODAL_OPEN:
@@ -51,8 +56,11 @@ const mapStateToProps = ({ modalState: { show, text } }) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     modalOpen: () => dispatch({ type: MODAL_OPEN }),
-    modalClose: () => dispatch({ type: MODAL_CLOSE }),
-    reset: () => dispatch({ type: RESET }),
+    modalClose: () => dispatch(modalClose()),
+    reset: () => {
+      dispatch(Reset());
+      dispatch(modalClose());
+    },
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Modal);
