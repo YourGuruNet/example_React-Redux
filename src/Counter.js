@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { MODAL_OPEN } from './Modal';
 
 export const DECREASE = 'DECREASE';
 export const INCREASE = 'INCREASE';
@@ -46,17 +47,21 @@ const Counter = ({ name, count, increase, decrease, reset }) => {
   );
 };
 // States
-function mapStateToProps(state) {
+function mapStateToProps({ countState: { count, name } }) {
   return {
-    count: state.count,
-    name: state.name,
+    count: count,
+    name: name,
   };
 }
 // Functions
 function mapDispatchToProps(dispatch) {
   return {
     increase: () => dispatch({ type: INCREASE }),
-    reset: () => dispatch({ type: RESET }),
+    reset: () =>
+      dispatch({
+        type: MODAL_OPEN,
+        payload: { text: 'Do you wanna restart your counter?' },
+      }),
     decrease: () => dispatch({ type: DECREASE }),
   };
 }

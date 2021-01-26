@@ -3,13 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { CounterReducer } from './Counter';
-import { createStore } from 'redux';
+import { ModalReducer } from './Modal';
+import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 // Store setup
 const store = createStore(
-  CounterReducer
-  // window.__REDUX_DEVTOOLS_EXTENSION__
-  //&& window.__REDUX_DEVTOOLS_EXTENSION__()
+  combineReducers({
+    countState: CounterReducer,
+    modalState: ModalReducer,
+  }),
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 ReactDOM.render(
   <Provider store={store}>
