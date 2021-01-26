@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { MODAL_OPEN } from './Modal';
+import { modalOpen } from './Modal';
 
 export const DECREASE = 'DECREASE';
 export const INCREASE = 'INCREASE';
@@ -8,6 +8,12 @@ export const RESET = 'RESET';
 
 export const Reset = () => {
   return { type: RESET };
+};
+export const Increase = () => {
+  return { type: INCREASE };
+};
+export const Decrease = () => {
+  return { type: DECREASE };
 };
 
 // Setup initial states
@@ -28,22 +34,28 @@ export const CounterReducer = (state = defaultState, action) => {
       return state;
   }
 };
-const Counter = ({ name, count, increase, decrease, reset }) => {
+const Counter = ({ name, count, Increase, modalOpen, Decrease }) => {
   // console.log(props);
   return (
     <div className='container'>
-      <h1>{`Hey, ${name}! Now
-       you can test this app`}</h1>
       <h1>Counter</h1>
+      <h2>{`Hey, ${name}! Now
+       you can test this app`}</h2>
+
       <p className='counter'>{count}</p>
       <div className='buttons'>
-        <button className='btn' onClick={decrease}>
+        <button className='btn' onClick={Decrease}>
           decrease
         </button>
-        <button className='btn' onClick={reset}>
+        <button
+          className='btn'
+          onClick={() =>
+            modalOpen(`Hey ${name}! Do you wanna restart your counter?`)
+          }
+        >
           restart
         </button>
-        <button className='btn' onClick={increase}>
+        <button className='btn' onClick={Increase}>
           increase
         </button>
       </div>
@@ -58,15 +70,9 @@ function mapStateToProps({ countState: { count, name } }) {
   };
 }
 // Functions
-function mapDispatchToProps(dispatch) {
-  return {
-    increase: () => dispatch({ type: INCREASE }),
-    reset: () =>
-      dispatch({
-        type: MODAL_OPEN,
-        payload: { text: 'Do you wanna restart your counter?' },
-      }),
-    decrease: () => dispatch({ type: DECREASE }),
-  };
-}
+const mapDispatchToProps = {
+  Increase,
+  modalOpen,
+  Decrease,
+};
 export default connect(mapStateToProps, mapDispatchToProps)(Counter);

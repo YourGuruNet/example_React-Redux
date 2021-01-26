@@ -6,15 +6,26 @@ import { Reset } from './Counter';
 export const MODAL_OPEN = 'MODAL_OPEN ';
 export const MODAL_CLOSE = 'MODAL_CLOSE';
 // Setup initial states
-const defaultState = {
-  show: false,
-  text: '',
-};
 
+//Modal close
 export const modalClose = () => {
   return { type: MODAL_CLOSE };
 };
 
+//Modal Open
+export const modalOpen = (text) => {
+  return {
+    type: MODAL_OPEN,
+    payload: { text: text },
+  };
+};
+
+//States
+const defaultState = {
+  show: false,
+  text: '',
+};
+// Reducer switch
 export const ModalReducer = (state = defaultState, action) => {
   switch (action.type) {
     case MODAL_OPEN:
@@ -55,7 +66,7 @@ const mapStateToProps = ({ modalState: { show, text } }) => {
 // Functions
 const mapDispatchToProps = (dispatch) => {
   return {
-    modalOpen: () => dispatch({ type: MODAL_OPEN }),
+    modalOpen: () => dispatch(modalOpen()),
     modalClose: () => dispatch(modalClose()),
     reset: () => {
       dispatch(Reset());

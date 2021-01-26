@@ -23,6 +23,7 @@ body {
   justify-content: center;
   align-items: center;
   font-size: 3rem;
+  text-transform: uppercase;
 }
 
 h1,
@@ -67,11 +68,13 @@ Counter
 */
 .container {
   text-align: center;
-  text-transform: capitalize;
   max-width: 35rem;
 }
 .container h1 {
   font-size: 3rem;
+}
+.container h2 {
+  font-size: 2rem;
 }
 .buttons {
   display: flex;
